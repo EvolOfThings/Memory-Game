@@ -1,20 +1,20 @@
 /*
  * Create a list that holds all of your cards
  */
- const lists = document.querySelectorAll('li .card');
+ const lists = document.querySelectorAll('.card');
 
 
 
-function displayCard() {
-  if (lists[i] != open) {
-    addClass()
-  }
+
+displayCard = () => {
+  console.log(this);
 }
 
 
 
 
- lists.addEventListener("click", displayCard())
+
+ lists.forEach(list => list.addEventListener('click', displayCard));
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
