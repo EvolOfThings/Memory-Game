@@ -1,20 +1,16 @@
 /*
  * Create a list that holds all of your cards
  */
- const lists = document.querySelectorAll('.card');
 
 
 
 
-displayCard = () => {
-  console.log(this);
-}
+let cardList = [];
 
 
 
 
 
- lists.forEach(list => list.addEventListener('click', displayCard));
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -49,3 +45,24 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+displayCard = () => {
+  console.log(this);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
