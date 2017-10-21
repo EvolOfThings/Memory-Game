@@ -56,7 +56,17 @@ deck = $('.deck');
 // click event listener to the card elements.
 deck.on('click', '.card', function() {
   let opened = $(this).addClass('open show');
-  console.log(opened);
+
+// disable the card from being clicked again after it is opened
+  if($(this).hasClass('open')) {
+    $(this).prop('disabled', true);
+  }
+
+  // push the cards to openedCards array
+
+  // compare the clicked cards array
+
+  // if has same children classes  then add match class
 });
 
 
