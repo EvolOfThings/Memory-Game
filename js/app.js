@@ -2,14 +2,41 @@
  * Create a list that holds all of your cards
  */
 
+const allCards = [
+  'fa fa-diamond',
+  'fa fa-diamond',
+  'fa fa-paper-plane-o',
+  'fa fa-paper-plane-o',
+  'fa fa-anchor',
+  'fa fa-anchor',
+  'fa fa-bolt',
+  'fa fa-bolt',
+  'fa fa-cube',
+  'fa fa-cube',
+  'fa fa-leaf',
+  'fa fa-leaf',
+  'fa fa-bicycle',
+  'fa fa-bicycle',
+  'fa fa-bomb',
+  'fa fa-bomb'
+];
 
 
+// Shuffle function from http://stackoverflow.com/a/2450976
 
-let cardList = [];
+function shuffle(array) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
 
+  while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+  }
 
-
-
+  return array;
+}
 
 /*
  * Display the cards on the page
@@ -18,21 +45,42 @@ let cardList = [];
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+shuffledCards = shuffle(allCards);
 
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+// shortcuts variables
+deck = $('.deck');
 
-    return array;
-}
+
+
+// click event listener to the card elements.
+deck.on('click', '.card', function() {
+  let opened = $(this).addClass('open show');
+  console.log(opened);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -46,9 +94,12 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-displayCard = () => {
-  console.log(this);
-}
+
+let openedCards = [];
+
+
+
+
 
 
 
