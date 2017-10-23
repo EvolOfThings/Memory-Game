@@ -71,15 +71,25 @@ let opened = $(this).addClass('open show');
 openedCards.push(...opened.children()); // spread is used on opened array to avoid nesting
 console.log(openedCards);
 
+compareCards();
+});
+
 
   // compare the clicked cards array
+compareCards = (array) => {
+  for (let i = 0; i < openedCards.length; i++) {
+    if (openedCards[0] === openedCards[1]) {
+      console.log('match');
+    } else {
+      console.log('not a match');
+    }
+  }
+}
 
 
 
 
   // if has same children classes  then add match class
-});
-
 
 
 
