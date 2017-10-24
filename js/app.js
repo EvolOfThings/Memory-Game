@@ -68,7 +68,7 @@ let opened = $(this).addClass('open show');
   }
 
   // push the cards to openedCards array
-openedCards.push(...opened.children()); // spread is used on opened array to avoid nesting
+openedCards.push(opened.children().attr('class')); // spread is used on opened array to avoid nesting
 console.log(openedCards);
 
 compareCards();
@@ -77,11 +77,15 @@ compareCards();
 
   // compare the clicked cards array
 compareCards = (array) => {
-  for (let i = 0; i < openedCards.length; i++) {
-    if (openedCards[0] === openedCards[1]) {
-      console.log('match');
+  if(openedCards.length === 2){
+    let classCard1 = openedCards[0];
+    let classCard2 = openedCards[1];
+    console.log(classCard1, classCard2)
+    if(classCard1 === classCard2) {
+      console.log('matched');
     } else {
       console.log('not a match');
+      //flipBack function
     }
   }
 }
