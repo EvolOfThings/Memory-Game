@@ -67,6 +67,8 @@ let opened = $(this).addClass('open show');
     return opened ;
   }
 
+
+
   // push the cards to openedCards array
 openedCards.push(opened.children().attr('class')); // spread is used on opened array to avoid nesting
 console.log(openedCards);
