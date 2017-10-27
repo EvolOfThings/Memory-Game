@@ -56,28 +56,39 @@ let openedCards = [];
 
 
 // click event listener to the card elements.
-deck.on('click', '.card', function() {
+deck.on('click', 'li', function(event) {
+  let cardClicked = $(event.target);
 
-let opened = $(this).addClass('open show');
-
-// disable the card from being clicked again after it is opened
-  if($(this).hasClass('open')) {
-    $(this).prop('disabled', true);
-  } else {
-    return opened ;
-  }
-
-
-
-  // push the cards to openedCards array
-openedCards.push(opened.children().attr('class')); // spread is used on opened array to avoid nesting
-console.log(openedCards);
-
-compareCards();
+  showSymbol(cardClicked);
 });
 
 
-  // compare the clicked cards array
+//Display the cards
+showSymbol = (card) => {
+  card.addClass('open show');
+  addToOpenedCards(card);
+};
+
+
+//add opened cards to OpenedCards array
+addToOpenedCards = (card) => {
+  let x = card.children().attr('class');
+  console.log(x);
+
+  openedCards.push(x);
+  console.log(openedCards);
+
+  compareCards();
+};
+
+// disable the card from being clicked again after it is opened
+  // if($(this).hasClass('open')) {
+  //   $(this).prop('disabled', true);
+  // } else {
+  //   return opened ;
+  // }
+
+//  compare the clicked cards  in openedCards array
 compareCards = (array) => {
   if(openedCards.length === 2){
     let classCard1 = openedCards[0];
@@ -90,7 +101,7 @@ compareCards = (array) => {
       //flipBack function
     }
   }
-}
+};
 
 
 
