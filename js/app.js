@@ -49,14 +49,18 @@ shuffledCards = shuffle(allCards);
 
 
 // shortcuts variables
-let deck = $('.deck');
-let openedCards = [];
+let deck = $('.deck'),
+    openedCards = [],
+    matches = 0;
+
 
 
 
 // click event listener to the card elements.
-deck.on('click', 'li', function(event) {
+deck.on('click', '.card', function(event) {
   let cardClicked = $(event.target);
+  console.log(cardClicked);
+
 
   showSymbol(cardClicked);
 });
@@ -66,20 +70,21 @@ deck.on('click', 'li', function(event) {
 showSymbol = (card) => {
   card.addClass('open show');
 
-// disable the card from being clicked again after it is opened
+      // disable the card from being clicked again after it is opened
   if(card.hasClass('open')) {
     card.prop('disabled', true);
   }
   addToOpenedCards(card);
+
 };
 
 
-//add opened cards to OpenedCards array
+//add opened cards to openedCards array
 addToOpenedCards = (card) => {
   let x = card.children().attr('class');
   console.log(x);
 
-  openedCards.push(x);
+  openedCards.push(card);
   console.log(openedCards);
 
   compareCards();
@@ -87,16 +92,17 @@ addToOpenedCards = (card) => {
 
 
 //  compare the clicked cards  in openedCards array
-compareCards = (array) => {
+compareCards = () => {
   if(openedCards.length === 2){
-    let classCard1 = openedCards[0];
-    let classCard2 = openedCards[1];
+    let classCard1 = openedCards[0].children().attr('class'),
+        classCard2 = openedCards[1].children().attr('class');
     console.log(classCard1, classCard2)
     if(classCard1 === classCard2) {
       console.log('matched');
+      lockMatch();
     } else {
       console.log('not a match');
-      //flipBack function
+      flipBack();
     }
   }
 };
@@ -104,11 +110,29 @@ compareCards = (array) => {
 
 
   // if has same children classes  then add match class
+lockMatch = () => {
+  openedCards[0].removeClass('open show').addClass('match');
+  openedCards[1].removeClass('open show').addClass('match');
+  console.log(...openedCards);
+  matches++;
+  openedCards.shift();
+  openedCards.shift();
+  console.log(openedCards);
+  };
 
 
+// 1. if it's not a match it wont show the second card
+// 2. the clicked unmatched cards get disabled for seconf click try
 
 
-
+// flipBack function for unmatching cards
+flipBack = () => {
+  openedCards[0].removeClass('open show');
+  openedCards[1].removeClass('open show');
+  openedCards.shift();
+  openedCards.shift();
+  console.log(...openedCards);
+};
 
 
 
