@@ -69,7 +69,7 @@ deck.on('click', '.card', function(event) {
 //Display the cards
 showSymbol = (card) => {
   card.addClass('open show');
-
+  console.log(card);
       // disable the card from being clicked again after it is opened
   if(card.hasClass('open')) {
     card.prop('disabled', true);
@@ -115,23 +115,25 @@ lockMatch = () => {
   openedCards[1].removeClass('open show').addClass('match');
   console.log(...openedCards);
   matches++;
-  openedCards.shift();
-  openedCards.shift();
+  openedCards.splice(0,2);
   console.log(openedCards);
   };
 
 
+
+//                TO FIX
 // 1. if it's not a match it wont show the second card
 // 2. the clicked unmatched cards get disabled for seconf click try
+// 3. line 96 may be causing the bug
 
 
-// flipBack function for unmatching cards
+// // flipBack function for unmatching cards
 flipBack = () => {
   openedCards[0].removeClass('open show');
   openedCards[1].removeClass('open show');
   openedCards.shift();
   openedCards.shift();
-  console.log(...openedCards);
+  console.log(openedCards);
 };
 
 
