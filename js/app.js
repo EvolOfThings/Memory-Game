@@ -57,7 +57,7 @@ let deck = $('.deck'),
 
 
 // click event listener to the card elements.
-deck.on('click', '.card', function(event) {
+deck.on('click', 'li', function(event) {
   let cardClicked = $(event.target);
   console.log(cardClicked);
 
@@ -68,7 +68,7 @@ deck.on('click', '.card', function(event) {
 
 //Display the cards
 showSymbol = (card) => {
-  card.addClass('open show');
+  card.addClass(' open show');
   console.log(card);
       // disable the card from being clicked again after it is opened
   if(card.hasClass('open')) {
