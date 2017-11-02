@@ -105,6 +105,7 @@ compareCards = () => {
     } else {
       console.log('not a match');
       flipBack();  //problem: if it's not a match it deletes the open show immediately so second card is never shown
+    //cardEffect();
     }
   }
 };
@@ -129,21 +130,36 @@ lockMatch = () => {
 // 3. line 96 may be causing the bug
 
 
-// // flipBack function for unmatching cards
+// flipBack function for unmatching cards
 flipBack = () => {
   openedCards[0].removeClass('open show');
   openedCards[1].removeClass('open show');
-  openedCards.shift();
-  openedCards.shift();
+  removeCardsFromList();
   console.log(openedCards);
 };
 
 
+// function cardEffect() {
+//     openedCards[0].delay(300).fadeOut("slow").fadeIn("slow");
+//     openedCards[1].delay(300).fadeOut("slow").fadeIn("slow", function() {
+//         hideCards(); // this function has to be passed as part of end of second transition
+//     });
+//     //hideCards();
+// }
 
 
+// function hideCards() {
+//     console.log(openedCards);
+//     openedCards[0].removeClass("open show");
+//     openedCards[1].removeClass("open show");
+//     removeCardsFromList();
+// }
 
-
-
+function removeCardsFromList() {
+    openedCards.shift();
+    openedCards.shift();
+    console.log("pos: ",openedCards);
+}
 
 
 
