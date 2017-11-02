@@ -55,25 +55,27 @@ let deck = $('.deck'),
 
 
 
+//In fat arrow functions, this never gets bound to a new value
 
 // click event listener to the card elements.
-deck.on('click', 'li', function(event) {
+deck.on('click', '.card', (event) => {
   let cardClicked = $(event.target);
   console.log(cardClicked);
 
-
+console.log(event.currentTarget);
   showSymbol(cardClicked);
 });
 
 
 //Display the cards
 showSymbol = (card) => {
-  card.addClass(' open show');
-  console.log(card);
+  card.addClass('open show');
+  console.log(card.children());
       // disable the card from being clicked again after it is opened
   if(card.hasClass('open')) {
     card.prop('disabled', true);
   }
+  console.log(event.currentTarget); // logs deck as target and hence open show classes are getting added
   addToOpenedCards(card);
 
 };
@@ -102,7 +104,7 @@ compareCards = () => {
       lockMatch();
     } else {
       console.log('not a match');
-      flipBack();
+      flipBack();  //problem: if it's not a match it deletes the open show immediately so second card is never shown
     }
   }
 };
