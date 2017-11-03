@@ -70,14 +70,11 @@ console.log(event.currentTarget);
 //Display the cards
 showSymbol = (card) => {
   card.addClass('open show');
-  console.log(card.children());
-      // disable the card from being clicked again after it is opened
-  if(card.hasClass('open')) {
-    card.prop('disabled', true);
-  }
-  console.log(event.currentTarget); // logs deck as target and hence open show classes are getting added
-  addToOpenedCards(card);
 
+  console.log(card);
+  console.log(event.currentTarget); // logs deck as target and hence open show classes are getting added
+
+  addToOpenedCards(card);
 };
 
 
@@ -134,8 +131,8 @@ lockMatch = () => {
 flipBack = () => {
   openedCards[0].removeClass('open show');
   openedCards[1].removeClass('open show');
-  removeCardsFromList();
   console.log(openedCards);
+  removeCardsFromList();
 };
 
 
