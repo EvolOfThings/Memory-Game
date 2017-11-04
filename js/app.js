@@ -108,7 +108,6 @@ compareCards = () => {
 };
 
 
-
   // if has same children classes  then add match class
 lockMatch = () => {
   openedCards[0].removeClass('open show').addClass('match');
@@ -119,12 +118,6 @@ lockMatch = () => {
   console.log(openedCards);
   };
 
-
-
-//                TO FIX
-// 1. if it's not a match it wont show the second card
-// 2. the clicked unmatched cards get disabled for seconf click try
-// 3. line 96 may be causing the bug
 
 
 // flipBack function for unmatching cards
@@ -142,37 +135,11 @@ flipBack = () => {
 };
 
 
-// function cardEffect() {
-//     openedCards[0].delay(300).fadeOut("slow").fadeIn("slow");
-//     openedCards[1].delay(300).fadeOut("slow").fadeIn("slow", function() {
-//         hideCards(); // this function has to be passed as part of end of second transition
-//     });
-//     //hideCards();
-// }
-
-
-// function hideCards() {
-//     console.log(openedCards);
-//     openedCards[0].removeClass("open show");
-//     openedCards[1].removeClass("open show");
-//     removeCardsFromList();
-// }
-
 function removeCardsFromList() {
     openedCards.shift();
     openedCards.shift();
     console.log("pos: ",openedCards);
 }
-
-
-
-
-
-
-
-
-
-
 
 
 /*
@@ -190,6 +157,13 @@ function removeCardsFromList() {
 
 
 
+
+//                TO FIX
+// 1. disable click for opened card
+
+//                TO CODE
+// 1. movecounter
+// 2. all cards matched - win modal
 
 
 
