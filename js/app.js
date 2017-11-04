@@ -129,10 +129,16 @@ lockMatch = () => {
 
 // flipBack function for unmatching cards
 flipBack = () => {
+  //this effect added so that it shows the second clicked card otherwise flipbacks without showing the second
+  openedCards[0].delay(250).fadeOut("slow").fadeIn("slow");
+  openedCards[1].delay(250).fadeOut("slow").fadeIn("slow", () => {
+  console.log(...openedCards); // to check what array items go through
   openedCards[0].removeClass('open show');
   openedCards[1].removeClass('open show');
-  console.log(openedCards);
+  console.log(...openedCards);
   removeCardsFromList();
+  });
+  console.log(...openedCards);
 };
 
 
