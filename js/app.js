@@ -99,6 +99,7 @@ showSymbol = (card) => {
   card.addClass('open show');
 
   movesCounter();
+  moves.text(movesCount);
 
   console.log(card);
   console.log(event.currentTarget); // logs deck as target and hence open show classes are getting added
@@ -174,10 +175,30 @@ removeCardsFromList = () => {
 
 movesCounter = () => {
     movesCount++;
-    moves.text(movesCount);
 }
 
 
+
+// restart the game : FIX
+
+$('.restart').on('click', 'i', (eve) => {
+  let clicked = $(eve.target);
+  restart();
+  console.log(clicked);
+});
+
+
+restart = () => {
+   openedCards = [];
+      matches = 0;
+      movesCount = 0;
+
+      moves.text(movesCount);
+      deck.empty();
+      shuffledCards;
+      generateCards();
+      console.log(`${matches} ${movesCount}`);
+}
 
 
 
@@ -188,7 +209,7 @@ movesCounter = () => {
 // 1. disable click for opened card
 
 //                TO CODE
-// 1. movecounter
+// 1. DONE movecounter
 // 2. all cards matched - win modal
 // 3. restart function
 
