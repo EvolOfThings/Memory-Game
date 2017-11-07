@@ -144,6 +144,10 @@ lockMatch = () => {
   openedCards[1].removeClass('open show').addClass('match');
   console.log(...openedCards);
   matches++;
+  gameWon();
+  // if (matches === 8) {
+  //   gameWon();
+  // }
   openedCards.splice(0,2);
   console.log(openedCards);
   };
@@ -153,8 +157,8 @@ lockMatch = () => {
 // flipBack function for unmatching cards
 flipBack = () => {
   //this effect added so that it shows the second clicked card otherwise flipbacks without showing the second
-  openedCards[0].delay(250).fadeOut("slow").fadeIn("slow");
-  openedCards[1].delay(250).fadeOut("slow").fadeIn("slow", () => {
+  openedCards[0].delay(300).fadeOut("slow").fadeIn("slow");
+  openedCards[1].delay(300).fadeOut("slow").fadeIn("slow", () => {
   console.log(...openedCards); // to check what array items go through
   openedCards[0].removeClass('open show');
   openedCards[1].removeClass('open show');
@@ -179,9 +183,9 @@ movesCounter = () => {
 
 
 
-// restart the game : FIX
+// restart the game
 
-$('.restart').on('click', 'i', (eve) => {
+$('.restart').on('click', (eve) => {
   let clicked = $(eve.target);
   restart();
   console.log(clicked);
@@ -197,21 +201,45 @@ restart = () => {
       deck.empty();
       shuffledCards;
       generateCards();
-      console.log(`${matches} ${movesCount}`);
 }
 
+//when matches = 8, game won
+
+gameWon = () => {
+
+const modal = $('#myModal');
+  // from https://www.w3schools.com/howto/howto_css_modals.asp
+  modal.css('display', 'block');
+
+  // Total number of moves made
+  $('.movesMade').text(`Won in ${movesCount} moves`);
+
+  //To play again
+  $('.playAgain').on('click', () => {
+    modal.css('display', 'none');
+    restart()
+  });
+
+  // When the user clicks on <span> (x), close the modal
+  $('.close').on("click", () => modal.css('display', 'none'));
 
 
-
-
+  // When the user clicks anywhere outside of the modal, close it
+document.onclick = function(event) {
+    if (event.target == modal) {
+      modal.css('display', 'none');
+    }
+  }
+}
 
 //                TO FIX
 // 1. disable click for opened card
+//2. Modal window click not working
 
 //                TO CODE
 // 1. DONE movecounter
 // 2. all cards matched - win modal
-// 3. restart function
+// 3. DONE restart function
 
 
 
