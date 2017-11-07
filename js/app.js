@@ -76,7 +76,9 @@ generateCards();
 // shortcuts variables
 let deck = $('.deck'),
     openedCards = [],
-    matches = 0;
+    matches = 0,
+    movesCount = 0,
+    moves = $('.moves');
 
 
 
@@ -95,6 +97,8 @@ console.log(event.currentTarget);
 //Display the cards
 showSymbol = (card) => {
   card.addClass('open show');
+
+  movesCounter();
 
   console.log(card);
   console.log(event.currentTarget); // logs deck as target and hence open show classes are getting added
@@ -160,10 +164,17 @@ flipBack = () => {
 };
 
 
-function removeCardsFromList() {
+removeCardsFromList = () => {
     openedCards.shift();
     openedCards.shift();
     console.log("pos: ",openedCards);
+}
+
+//Moves counter
+
+movesCounter = () => {
+    movesCount++;
+    moves.text(movesCount);
 }
 
 
