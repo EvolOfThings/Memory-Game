@@ -4,20 +4,12 @@
 
 const allCards = [
   'fa fa-diamond',
-  'fa fa-diamond',
-  'fa fa-paper-plane-o',
   'fa fa-paper-plane-o',
   'fa fa-anchor',
-  'fa fa-anchor',
-  'fa fa-bolt',
   'fa fa-bolt',
   'fa fa-cube',
-  'fa fa-cube',
-  'fa fa-leaf',
   'fa fa-leaf',
   'fa fa-bicycle',
-  'fa fa-bicycle',
-  'fa fa-bomb',
   'fa fa-bomb'
 ];
 
@@ -38,7 +30,7 @@ function shuffle(array) {
   return array;
 }
 
-shuffledCards = shuffle(allCards);
+shuffle(allCards);
 
 /*
  * Display the cards on the page
@@ -50,10 +42,14 @@ shuffledCards = shuffle(allCards);
 //generated li and i element for each card
 
 generateCards = () => {
-  for(const element of shuffledCards) {
-    const deckList = $('ul.deck');
-    let li = $('<li/>').addClass('card').appendTo(deckList);
-    let iTag = $('<i/>').addClass(element).appendTo(li);
+  for(let i = 0; i < 2; i++) {
+    const shuffledCards = shuffle(allCards);
+    //console.log(shuffledCards);
+    for(const element of shuffledCards) {
+      const deckList = $('ul.deck');
+      let li = $('<li/>').addClass('card').appendTo(deckList);
+      let iTag = $('<i/>').addClass(element).appendTo(li);
+    }
   }
 };
 
@@ -144,10 +140,9 @@ lockMatch = () => {
   openedCards[1].removeClass('open show').addClass('match');
   console.log(...openedCards);
   matches++;
-  gameWon();
-  // if (matches === 8) {
-  //   gameWon();
-  // }
+  if (matches === 8) {
+    gameWon();
+  }
   openedCards.splice(0,2);
   console.log(openedCards);
   };
@@ -199,46 +194,51 @@ restart = () => {
 
       moves.text(movesCount);
       deck.empty();
-      shuffledCards;
+      shuffle(allCards);
       generateCards();
 }
 
-//when matches = 8, game won
 
+//when matches = 8, game won
 gameWon = () => {
 
-const modal = $('#myModal');
   // from https://www.w3schools.com/howto/howto_css_modals.asp
-  modal.css('display', 'block');
+
+const modal = $('#myModal');
+const span = document.getElementsByClassName("close")[0];
+
+
+modal.css('display', 'block');
 
   // Total number of moves made
   $('.movesMade').text(`Won in ${movesCount} moves`);
 
-  //To play again
-  $('.playAgain').on('click', () => {
-    modal.css('display', 'none');
-    restart()
-  });
-
   // When the user clicks on <span> (x), close the modal
-  $('.close').on("click", () => modal.css('display', 'none'));
-
+  span.onclick = () => modal.css('display', 'none');
 
   // When the user clicks anywhere outside of the modal, close it
-document.onclick = function(event) {
-    if (event.target == modal) {
+$(window).on('click', (event) => {
+   const target = event.target;
+   // console.log(target);
+    if (target.id == 'myModal') {
       modal.css('display', 'none');
     }
-  }
+  });
+
+    //To play again
+  $('.playAgain').on('click', () => location.reload());
+
 }
+
+
 
 //                TO FIX
 // 1. disable click for opened card
-//2. Modal window click not working
+//2. DONE Modal window click not working
 
 //                TO CODE
 // 1. DONE movecounter
-// 2. all cards matched - win modal
+// 2. DONE all cards matched - win modal
 // 3. DONE restart function
 
 
