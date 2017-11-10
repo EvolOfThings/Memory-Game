@@ -94,6 +94,12 @@ console.log(event.currentTarget);
 showSymbol = (card) => {
   card.addClass('open show');
 
+
+//disables from card being clicked again
+if (card.hasClass('open')) {
+  card.click(false);
+}
+
   movesCounter();
   moves.text(movesCount);
 
@@ -127,8 +133,7 @@ compareCards = () => {
       lockMatch();
     } else {
       console.log('not a match');
-      flipBack();  //problem: if it's not a match it deletes the open show immediately so second card is never shown
-    //cardEffect();
+      flipBack();
     }
   }
 };
@@ -158,6 +163,10 @@ flipBack = () => {
   openedCards[0].removeClass('open show');
   openedCards[1].removeClass('open show');
   console.log(...openedCards);
+
+  //enables the click on the attempted card for another try
+  $('.card').unbind('click');
+
   removeCardsFromList();
   });
   console.log(...openedCards);
@@ -234,6 +243,7 @@ $(window).on('click', (event) => {
 
 //                TO FIX
 // 1. disable click for opened card
+
 //2. DONE Modal window click not working
 
 //                TO CODE
