@@ -152,4 +152,30 @@ h1 {
     padding-left: 50px;
 }
 
-
+/*responsive*/
+@media only screen and (max-width : 450px) {
+    body {
+        font-size: 12px;
+    }
+    .container {
+        margin: 0 auto;
+        width: 375px;
+    }
+    .score-panel {
+        width: 50%;
+    }
+    .score-panel .stars li {
+        font-size: 12px;
+    }
+    .deck {
+        margin: 0 auto;
+        width: 100%;
+        height: 320px;
+        min-height: 500px;
+        box-shadow: none;
+    }
+    .deck .card {
+        height: 75px;
+        width: 75px;
+    }
+}
