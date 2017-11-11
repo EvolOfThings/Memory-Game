@@ -1,7 +1,4 @@
-/*
- * Create a list that holds all of your cards
- */
-
+// Create a list that holds all of your cards
 const allCards = [
   'fa fa-diamond',
   'fa fa-paper-plane-o',
@@ -15,7 +12,6 @@ const allCards = [
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-
 function shuffle(array) {
   let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -29,8 +25,8 @@ function shuffle(array) {
 
   return array;
 }
-
 shuffle(allCards);
+
 
 /*
  * Display the cards on the page
@@ -39,8 +35,8 @@ shuffle(allCards);
  * DONE  - add each card's HTML to the page
  */
 
-//generated li and i element for each card
 
+//generated li and i element for each card
 generateCards = () => {
   for(let i = 0; i < 2; i++) {
     const shuffledCards = shuffle(allCards);
@@ -67,16 +63,18 @@ generateCards();
  * DONE   + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-
-
 // shortcuts variables
 let deck = $('.deck'),
     openedCards = [],
     matches = 0,
     movesCount = 0,
-    moves = $('.moves');
+    moves = $('.moves'),
+    timerOn = false,
+    clock;
 
-
+//timer initial values
+$("#seconds").html('00');
+$("#minutes").html('00');
 
 //Reminder: In fat arrow functions, this never gets bound to a new value
 
@@ -84,6 +82,10 @@ let deck = $('.deck'),
 deck.on('click', '.card', (event) => {
   let cardClicked = $(event.target);
   console.log(cardClicked);
+
+  if(timerOn === false) {
+    startTimer();
+  }
 
 console.log(event.currentTarget);
   showSymbol(cardClicked);
@@ -94,19 +96,15 @@ console.log(event.currentTarget);
 showSymbol = (card) => {
   card.addClass('open show');
 
-
-//disables from card being clicked again
-if (card.hasClass('open')) {
-  card.click(false);
-}
+//disables the card from being clicked again while it's still open
+  if (card.hasClass('open')) {
+    card.click(false);
+  }
 
   movesCounter();
   starRating();
-
-
-  console.log(card);
-  console.log(event.currentTarget); // logs deck as target and hence open show classes are getting added
-
+  //console.log(card);
+  //console.log(event.currentTarget);
   addToOpenedCards(card);
 };
 
@@ -114,11 +112,9 @@ if (card.hasClass('open')) {
 //add opened cards to openedCards array
 addToOpenedCards = (card) => {
   let x = card.children().attr('class');
-  console.log(x);
-
+ // console.log(x);
   openedCards.push(card);
-  console.log(openedCards);
-
+ // console.log(openedCards);
   compareCards();
 };
 
@@ -146,7 +142,9 @@ lockMatch = () => {
   openedCards[1].removeClass('open show').addClass('match');
   console.log(...openedCards);
   matches++;
-  if (matches === 8) {
+  if (matches === 1) {
+    // stop timer
+    stopTimer();
     gameWon();
   }
   openedCards.splice(0,2);
@@ -163,7 +161,6 @@ flipBack = () => {
   console.log(...openedCards); // to check what array items go through
   openedCards[0].removeClass('open show');
   openedCards[1].removeClass('open show');
-  console.log(...openedCards);
 
   //enables the click on the attempted card for another try
   $('.card').unbind('click');
@@ -180,17 +177,15 @@ removeCardsFromList = () => {
     console.log("pos: ",openedCards);
 }
 
-//Moves counter
 
+//Moves counter
 movesCounter = () => {
     movesCount++;
     moves.text(movesCount);
 }
 
 
-
 // restart the game
-
 $('.restart').on('click', (eve) => {
   let clicked = $(eve.target);
   restart();
@@ -202,13 +197,15 @@ restart = () => {
    openedCards = [];
       matches = 0;
       movesCount = 0;
-      $('.stars li').children().addClass('fa fa-star');
-
-
+      firstCard = true;
       moves.text(movesCount);
+      $('.stars li').children().addClass('fa fa-star');
       deck.empty();
       shuffle(allCards);
       generateCards();
+      stopTimer();
+      $("#seconds").html('00');
+      $("#minutes").html('00');
 }
 
 
@@ -216,10 +213,8 @@ restart = () => {
 gameWon = () => {
 
   // from https://www.w3schools.com/howto/howto_css_modals.asp
-
 const modal = $('#myModal');
 const span = document.getElementsByClassName("close")[0];
-
 
 modal.css('display', 'block');
 
@@ -247,12 +242,10 @@ $(window).on('click', (event) => {
 
     //To play again
   $('.playAgain').on('click', () => location.reload());
-
 }
 
 
 //StarRating
-
 starRating = () => {
   if (movesCount === 20) {
       $('.stars li:nth-child(1)').children().removeClass('fa fa-star');
@@ -263,26 +256,33 @@ starRating = () => {
 }
 
 
+//Timer
+//https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+startTimer = () => {
+  let sec = 0;
+  pad = (val) => { return val > 9 ? val : "0" + val; }
+
+//clock is global scoped because it was needed in stopTimer function
+  clock = setInterval( () => {
+    $("#seconds").html(pad(++sec%60));
+    $("#minutes").html(pad(parseInt(sec/60, 10))); }, 1000);
+  timerOn = true;
+}
+
+
+//Stops timer
+stopTimer = () => {
+  clearInterval(clock);
+  timerOn = false;
+}
+
+
 
 //                TO FIX
 
 //1. disable third click when two cards are open already clicked for comparison
 
-//                TO CODE
 
-// 1. Timer:
-  //  When the player starts a game, a displayed timer should also start.
-  //  Once the player wins the game, the timer stops.
-
-// 2. DONE star rating :
-  //  The game displays a star rating (from 1-3)
-  //  that reflects the player's performance. At the beginning of
-  //  a game, it should display 3 stars. After some number of moves,
-  //  it should change to a 2 star rating. After a few more moves,
-  //  it should change to a 1 star rating.
-
-  //  The number of moves needed to change the rating is up to you,
-  //  but it should happen at some point.
 
 
 
