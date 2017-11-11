@@ -102,7 +102,6 @@ showSymbol = (card) => {
     card.click(false);
   }
 
-  movesCounter();
   starRating();
   //console.log(card);
   //console.log(event.currentTarget);
@@ -128,6 +127,7 @@ compareCards = () => {
         classCard2 = openedCards[1].children().attr('class');
 
     console.log(classCard1, classCard2)
+      movesCounter();
     if(classCard1 === classCard2) {
       console.log('matched');
       lockMatch();
@@ -145,7 +145,7 @@ lockMatch = () => {
   openedCards[1].removeClass('open show').addClass('match');
   console.log(...openedCards);
   matches++;
-  if (matches === 8) {
+  if (matches === 1) {
     // stop timer
     stopTimer();
     gameWon();
@@ -222,14 +222,17 @@ const span = document.getElementsByClassName("close")[0];
 modal.css('display', 'block');
 
   // Total number of moves made
-  $('.movesMade').text(`Won in ${movesCount} moves`);
+  $('.movesMade').text(`Number of moves : ${movesCount}`);
+  let s = $('#seconds').text();
+  let m = $('#minutes').text();
+  $('.timeTaken').text(`Time Taken : ${m}:${s}`);
 
   //stars scored
-  let starsAppend = `<h4>Stars</h4>
+  let starsAppend = `
                     <span><i class="fa fa-star"></i></span>
                     <span><i class="fa ${ (movesCount >= 20) ? "fa-star-o" : "fa-star"} "></i></span>
                     <span><i class="fa ${ (movesCount >= 40) ? "fa-star-o" : "fa-star"} "></i></span>`;
-  $('#starsScored').append(starsAppend);
+  $('#starsScored').text(`Star Rating\xa0\xa0`).append(starsAppend);
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = () => modal.css('display', 'none');
@@ -267,8 +270,9 @@ startTimer = () => {
 
 //clock is global scoped because it was needed in stopTimer function
   clock = setInterval( () => {
-    $("#seconds").html(pad(++sec%60));
-    $("#minutes").html(pad(parseInt(sec/60, 10))); }, 1000);
+  $("#seconds").html(pad(++sec%60));
+  $("#minutes").html(pad(parseInt(sec/60, 10))); }, 1000);
+
   timerOn = true;
 }
 
