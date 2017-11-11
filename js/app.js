@@ -70,7 +70,7 @@ let deck = $('.deck'),
     movesCount = 0,
     moves = $('.moves'),
     timerOn = false,
-    clock;
+    clock; //for timer
 
 //timer initial values
 $("#seconds").html('00');
@@ -94,6 +94,7 @@ console.log(event.currentTarget);
 
 //Display the cards
 showSymbol = (card) => {
+  if (openedCards.length < 2) {
   card.addClass('open show');
 
 //disables the card from being clicked again while it's still open
@@ -106,6 +107,7 @@ showSymbol = (card) => {
   //console.log(card);
   //console.log(event.currentTarget);
   addToOpenedCards(card);
+}
 };
 
 
@@ -124,6 +126,7 @@ compareCards = () => {
   if(openedCards.length === 2){
     let classCard1 = openedCards[0].children().attr('class'),
         classCard2 = openedCards[1].children().attr('class');
+
     console.log(classCard1, classCard2)
     if(classCard1 === classCard2) {
       console.log('matched');
