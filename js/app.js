@@ -61,10 +61,10 @@ generateCards();
  * DONE - display the card's symbol (put this functionality in another function that you call from this one)
  * DONE - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  * DONE - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ * DONE   + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ * DONE   + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ * DONE   + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ * DONE   + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
 
@@ -101,7 +101,8 @@ if (card.hasClass('open')) {
 }
 
   movesCounter();
-  moves.text(movesCount);
+  starRating();
+
 
   console.log(card);
   console.log(event.currentTarget); // logs deck as target and hence open show classes are getting added
@@ -183,6 +184,7 @@ removeCardsFromList = () => {
 
 movesCounter = () => {
     movesCount++;
+    moves.text(movesCount);
 }
 
 
@@ -200,6 +202,8 @@ restart = () => {
    openedCards = [];
       matches = 0;
       movesCount = 0;
+      $('.stars li').children().addClass('fa fa-star');
+
 
       moves.text(movesCount);
       deck.empty();
@@ -222,6 +226,13 @@ modal.css('display', 'block');
   // Total number of moves made
   $('.movesMade').text(`Won in ${movesCount} moves`);
 
+  //stars scored
+  let starsAppend = `<h4>Stars</h4>
+                    <span><i class="fa fa-star"></i></span>
+                    <span><i class="fa ${ (movesCount >= 20) ? "fa-star-o" : "fa-star"} "></i></span>
+                    <span><i class="fa ${ (movesCount >= 40) ? "fa-star-o" : "fa-star"} "></i></span>`;
+  $('#starsScored').append(starsAppend);
+
   // When the user clicks on <span> (x), close the modal
   span.onclick = () => modal.css('display', 'none');
 
@@ -240,16 +251,38 @@ $(window).on('click', (event) => {
 }
 
 
+//StarRating
+
+starRating = () => {
+  if (movesCount === 20) {
+      $('.stars li:nth-child(1)').children().removeClass('fa fa-star');
+  }
+  if (movesCount === 40) {
+      $('.stars li:nth-child(2)').children().removeClass('fa fa-star');
+  }
+}
+
+
 
 //                TO FIX
-// 1. disable click for opened card
 
-//2. DONE Modal window click not working
+//1. disable third click when two cards are open already clicked for comparison
 
 //                TO CODE
-// 1. DONE movecounter
-// 2. DONE all cards matched - win modal
-// 3. DONE restart function
+
+// 1. Timer:
+  //  When the player starts a game, a displayed timer should also start.
+  //  Once the player wins the game, the timer stops.
+
+// 2. DONE star rating :
+  //  The game displays a star rating (from 1-3)
+  //  that reflects the player's performance. At the beginning of
+  //  a game, it should display 3 stars. After some number of moves,
+  //  it should change to a 2 star rating. After a few more moves,
+  //  it should change to a 1 star rating.
+
+  //  The number of moves needed to change the rating is up to you,
+  //  but it should happen at some point.
 
 
 
