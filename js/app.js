@@ -145,7 +145,7 @@ lockMatch = () => {
   openedCards[1].removeClass('open show').addClass('match');
   console.log(...openedCards);
   matches++;
-  if (matches === 1) {
+  if (matches === 8) {
     // stop timer
     stopTimer();
     gameWon();
