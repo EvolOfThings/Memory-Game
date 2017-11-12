@@ -24,11 +24,11 @@ You can play it online [here.](https://evolofthings.github.io/Memory-Game/) If y
 Match the respective card symbols in least number of moves. The lesser the number of moves and time taken to match all the pair of cards, higher the star rating.
 #### Screenshots of game UI:
 ##### Desktop
-![Alt text](/../<Screenshots>/Desktop.png?raw=true "Desktop Screenshot")
+![Alt text](/../Screenshots/Desktop.png?raw=true "Desktop Screenshot")
 ##### Mobile
-![Alt text](/../<Screenshots>/mobile.png?raw=true "Mobile Screenshot")
+![Alt text](/../Screenshots/mobile.png?raw=true "Mobile Screenshot")
 ##### Tablet
-![Alt text](/../<Screenshots>/Tablet.png?raw=true "Tablet Screenshot")
+![Alt text](/../Screenshots/Tablet.png?raw=true "Tablet Screenshot")
 
 **License:**  This project is released under the [MIT License.](https://opensource.org/licenses/MIT)
 
