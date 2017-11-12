@@ -152,6 +152,7 @@ h1 {
     padding-left: 50px;
 }
 
+
 /*responsive*/
 @media only screen and (max-width : 450px) {
     body {
@@ -177,5 +178,23 @@ h1 {
     .deck .card {
         height: 75px;
         width: 75px;
+    }
+}
+
+@media only screen and (min-width: 451px) and (max-width : 700px) {
+    .container {
+        margin: 0 auto;
+        width: 450px;
+    }
+    .deck {
+        margin: 0 auto;
+        width: 100%;
+        height: 320px;
+        min-height: 500px;
+        box-shadow: none;
+    }
+    .deck .card {
+        height: 82px;
+        width: 82px;
     }
 }
